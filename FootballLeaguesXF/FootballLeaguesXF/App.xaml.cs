@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Unity;
+using Unity.Lifetime;
 using Xamarin.Forms;
 
 namespace FootballLeaguesXF
@@ -13,27 +14,33 @@ namespace FootballLeaguesXF
 	public partial class App : Application
 	{
         public IUnityContainer container;
+        public INavigationService navigationService;
+        public IPageFactoryService pageFactoryService;
 
         public App ()
 		{
 			InitializeComponent();
             RegisterTypes();
-            MainPage = new FootballLeaguesXF.Views.CompetitionsPage();
-		}
+            navigationService.SetMainPage<CompetitionsViewModel>().Wait();
+        }
 
         private void RegisterTypes()
         {
             var container = new UnityContainer();
-            
+            var pageFactoryService = new PageFactoryService(container);
+
             //Structural Registration
             container.RegisterInstance<App>(this);
+            container.RegisterInstance<IPageFactoryService>(pageFactoryService);
+            container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
 
-            // Services
-            container.RegisterType<ICompetitionsService, CompetitionsService>();
-            container.RegisterType<IApiService, ApiService>();
-            container.RegisterType<CompetitionsViewModel>();
-         
+            //Views and ViewModels
+            InitViewAndViewModels.RegisterViewsAndViewModels(container, pageFactoryService);
+
+            //Global varaibles.
+            navigationService = container.Resolve<INavigationService>();
             this.container = container;
+            this.pageFactoryService = pageFactoryService;
         }
 
         protected override void OnStart ()

@@ -1,4 +1,6 @@
 ﻿using FootballLeaguesXF.Exceptions;
+using FootballLeaguesXF.IServices;
+using FootballLeaguesXF.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,9 +9,11 @@ using System.Text;
 
 namespace FootballLeaguesXF.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged, INavigationAware
     {
-        
+        protected INavigationService NavigationService;
+
+
         private bool _isBusy;
         public bool IsBusy
         {
@@ -19,16 +23,29 @@ namespace FootballLeaguesXF.ViewModels
 
         public bool IsNotBusy => !_isBusy;
 
-        public BaseViewModel()
-        {       
+        public BaseViewModel(INavigationService navigationService)
+        {
+            this.NavigationService = navigationService;
+
             this.PropertyChanged += OnPropertyChangedVM;
         }
 
         private void OnPropertyChangedVM(object sender, PropertyChangedEventArgs e)
         {
-           
+            //if (e.PropertyName == nameof(IsBusy))
+            //    ;
         }
-      
+
+        public virtual void NavigateTo(NavParams navParams)
+        {
+
+        }
+
+        public virtual void NavigateFrom(NavParams navParams)
+        {
+
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
@@ -54,5 +71,6 @@ namespace FootballLeaguesXF.ViewModels
                 ex is ApiException ? ex.Message :
                 "We are having problems connecting with server. Please try again later.";
         }
+
     }
 }

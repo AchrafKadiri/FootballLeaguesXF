@@ -11,11 +11,11 @@ namespace FootballLeaguesXF.Services
     public class ApiService : ApiDriver, IApiService
     {
 
-        async Task<T> IApiService.GetApi<T>(ApiUris apiUris)
+        async Task<T> IApiService.GetApi<T>(ApiUris apiUris,int id)
         {
             try
             {
-                var uri = FabricateUrl(apiUris, null);
+                var uri = FabricateUrl(apiUris, id);
                 return await base.GetAsync<T>(uri);
             }
             catch (Exception ex)

@@ -45,4 +45,19 @@ namespace FootballLeaguesXF.Model
         public int numberOfGames { get; set; }
         public DateTime lastUpdated { get; set; }
     }
+
+    public class Team
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string shortName { get; set; }
+        public string squadMarketValue { get; set; }
+        public string crestUrl { get; set; }
+    }
+
+    public class RootObject2
+    {
+        public int count { get; set; }
+        public List<Team> teams { get; set; }
+    }
 }

@@ -4,9 +4,23 @@
              x:Class="FootballLeaguesXF.Views.TeamsPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to TeamsPage"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="teamsList"
+                ItemsSource="{Binding Teams, Mode=TwoWay}"
+                HasUnevenRows="True"
+                CachingStrategy="RecycleElement"
+                RowHeight="100"
+                IsPullToRefreshEnabled="True"
+                Margin="10"
+                RefreshCommand="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshing}"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding crestUrl}"
+                                   Text="{Binding name}" TextColor="Black"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

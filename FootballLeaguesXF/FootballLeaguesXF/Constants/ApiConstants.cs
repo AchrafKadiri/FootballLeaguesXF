@@ -7,7 +7,8 @@ namespace FootballLeaguesXF.Constants
     public enum ApiUris
     {
         AllCompetitions_Get,      
-        AllTeamsByCompetition_Get      
+        AllTeamsByCompetition_Get,
+        LeagueTable_Get
     }
 
     public class ApiConstants
@@ -16,5 +17,6 @@ namespace FootballLeaguesXF.Constants
         public const string API_PROTOCOL = "http";
         public const string GetAllCompetitions = "v1/competitions";
         public const string GetAllTeamsByCompetition = "v1/competitions/{0}/teams";
+        public const string GetLeagueTable = "v1/competitions/{0}/leagueTable";
     }
 }

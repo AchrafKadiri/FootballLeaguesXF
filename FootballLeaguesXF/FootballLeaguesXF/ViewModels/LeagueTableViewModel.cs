@@ -12,20 +12,27 @@ using Xamarin.Forms;
 
 namespace FootballLeaguesXF.ViewModels
 {
-    public class CompetitionsViewModel : BaseViewModel, INavigationAware
+    public class LeagueTableViewModel : BaseViewModel, INavigationAware
     {
-        ICompetitionsService competitionsService;
+        ILeagueTableService leagueTableService;
 
-        public CompetitionsViewModel(INavigationService navigationService,ICompetitionsService competitionsService) : base(navigationService)
+        public LeagueTableViewModel(INavigationService navigationService, ILeagueTableService leagueTableService) : base(navigationService)
         {
-            this.competitionsService = competitionsService;
+            this.leagueTableService = leagueTableService;
         }
 
-        private List<RootObject> _competitions;
-        public List<RootObject> Competitions
+        private List<Standing> _table;
+        public List<Standing> Table
         {
-            get { return _competitions; }
-            set { SetProperty(ref _competitions, value); }
+            get { return _table; }
+            set { SetProperty(ref _table, value); }
+        }
+
+        private RootObject _competition;
+        public RootObject Competition
+        {
+            get { return _competition; }
+            set { SetProperty(ref _competition, value); }
         }
 
         private bool _isRefreshing = false;
@@ -35,29 +42,14 @@ namespace FootballLeaguesXF.ViewModels
             set { SetProperty(ref _isRefreshing, value); }
         }
 
-        private RootObject _competitionSelected;
-        public RootObject CompetitionSelected
-        {
-            get { return _competitionSelected; }
-            set
-            {
-                _competitionSelected = value;
-                if (value != null)
-                {
-                    //base.NavigationService.NavigateToAsync<TeamsViewModel>();
-                    base.NavigationService.NavigateToAsync<LeagueTableViewModel>();
-                    SetProperty(ref _competitionSelected, null);
-                }
-            }
-        }
-
+   
         async Task Load()
         {
             try
             {
-                var competitions = await competitionsService.GetCompetitions();
+                var table = await leagueTableService.GetLeagueTable(Competition.id);
 
-                Set(competitions);
+                Set(table);
             }
             catch (Exception ex)
             {
@@ -75,24 +67,23 @@ namespace FootballLeaguesXF.ViewModels
             }
         }
 
-        void Set(IEnumerable<RootObject> competitions)
+        void Set(List<Standing> table)
         {
-            Competitions = competitions.ToList();
+            Table = table.ToList();
         }
 
         public override void NavigateTo(NavParams navParams)
         {
             base.NavigateTo(navParams);
 
-           
+            Competition = navParams.Get<RootObject>("competitionSelected") as RootObject;
+
             Load().ToTaskRun();
         }
 
         public override void NavigateFrom(NavParams navParams)
         {
             base.NavigateFrom(navParams);
-
-            navParams.Add("competitionSelected", _competitionSelected);
         }
 
         public ICommand RefreshCommand

@@ -60,4 +60,24 @@ namespace FootballLeaguesXF.Model
         public int count { get; set; }
         public List<Team> teams { get; set; }
     }
+
+    public class Standing
+    {
+        public int rank { get; set; }
+        public string team { get; set; }
+        public int teamId { get; set; }
+        public int playedGames { get; set; }
+        public string crestURI { get; set; }
+        public int points { get; set; }
+        public int goals { get; set; }
+        public int goalsAgainst { get; set; }
+        public int goalDifference { get; set; }
+    }
+
+    public class RootObject3
+    {
+        public string leagueCaption { get; set; }
+        public int matchday { get; set; }
+        public List<Standing> standing { get; set; }
+    }
 }

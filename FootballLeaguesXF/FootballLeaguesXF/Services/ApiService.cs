@@ -42,6 +42,9 @@ namespace FootballLeaguesXF.Services
                 case ApiUris.AllTeamsByCompetition_Get:
                     urlrel = StringFormat(ApiConstants.GetAllTeamsByCompetition, args);
                     break;
+                case ApiUris.LeagueTable_Get:
+                    urlrel = StringFormat(ApiConstants.GetLeagueTable, args);
+                    break;
                 default:
                     throw new Exception("Code error. Please add missing APiUris Enum");
             }

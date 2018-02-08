@@ -16,11 +16,13 @@ namespace FootballLeaguesXF.ViewModels
             container.RegisterType<IApiService, ApiService>();
             container.RegisterType<ICompetitionsService, CompetitionsService>();
             container.RegisterType<ITeamsService, TeamsService>();
+            container.RegisterType<ILeagueTableService, LeagueTableService>();
 
             // RegisterForNavigation
             pageFactoryService.RegisterForNavigation<CompetitionsPage, CompetitionsViewModel>();
             pageFactoryService.RegisterForNavigation<TeamsPage, TeamsViewModel>();
-            
+            pageFactoryService.RegisterForNavigation<LeagueTablePage, LeagueTableViewModel>();
+
         }
     }
 }

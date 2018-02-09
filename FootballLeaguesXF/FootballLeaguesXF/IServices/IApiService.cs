@@ -15,6 +15,8 @@ namespace FootballLeaguesXF.IServices
         /// <param name="apiUris">Restfull rooting.</param>
         /// <returns>Value obtained from the API of type T.</returns>
         /// <remarks>For any error ApiException will be thrown.</remarks>
-        Task<T> GetApi<T>(ApiUris apiUris,int id = 0);
+        Task<T> GetApi<T>(ApiUris apiUris,bool force,int id = 0);
+
+        Task<T> GetApi<T>(ApiUris apiUris, bool force);
     }
 }

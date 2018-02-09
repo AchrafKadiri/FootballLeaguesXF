@@ -12,6 +12,6 @@ namespace FootballLeaguesXF.IServices
         /// Method which obtains League table from the server
         /// </summary>    
         /// <returns>List of teams ordered by rank.</returns>
-        Task<List<Standing>> GetLeagueTable(int idcompetition);
+        Task<List<Standing>> GetLeagueTable(int idcompetition,bool force);
     }
 }

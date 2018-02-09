@@ -12,6 +12,6 @@ namespace FootballLeaguesXF.IServices
         /// Method which obtains Teams from the server
         /// </summary>    
         /// <returns>List of teams.</returns>
-        Task<IEnumerable<Team>> GetTeams(int idcompetition);
+        Task<IEnumerable<Team>> GetTeams(int idcompetition,bool force);
     }
 }

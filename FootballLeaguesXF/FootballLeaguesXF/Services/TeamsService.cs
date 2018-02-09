@@ -17,12 +17,11 @@ namespace FootballLeaguesXF.Services
             this.apiService = apiService;
         }
 
-        async Task<IEnumerable<Team>> ITeamsService.GetTeams(int idCompetition)
+        async Task<IEnumerable<Team>> ITeamsService.GetTeams(int idCompetition, bool force)
         {
             try
             {
-               var root= await apiService.GetApi<RootObject2>(ApiUris.AllTeamsByCompetition_Get,idCompetition);
-
+               var root= await apiService.GetApi<RootObject2>(ApiUris.AllTeamsByCompetition_Get,force,idCompetition);
 
                return root.teams;
             }

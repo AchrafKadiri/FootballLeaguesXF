@@ -55,7 +55,7 @@ namespace FootballLeaguesXF.ViewModels
         {
             try
             {
-                var competitions = await competitionsService.GetCompetitions();
+                var competitions = await competitionsService.GetCompetitions(false);
 
                 Set(competitions);
             }
@@ -84,7 +84,6 @@ namespace FootballLeaguesXF.ViewModels
         {
             base.NavigateTo(navParams);
 
-           
             Load().ToTaskRun();
         }
 

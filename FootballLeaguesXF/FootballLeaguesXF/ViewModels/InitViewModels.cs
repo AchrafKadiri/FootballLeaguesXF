@@ -17,6 +17,7 @@ namespace FootballLeaguesXF.ViewModels
             container.RegisterType<ICompetitionsService, CompetitionsService>();
             container.RegisterType<ITeamsService, TeamsService>();
             container.RegisterType<ILeagueTableService, LeagueTableService>();
+            container.RegisterType<ICacheService, CacheService>();
 
             // RegisterForNavigation
             pageFactoryService.RegisterForNavigation<CompetitionsPage, CompetitionsViewModel>();

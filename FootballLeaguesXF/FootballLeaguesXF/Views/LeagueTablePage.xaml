@@ -5,16 +5,41 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="ItemTemplateStyle" TargetType="Label">
+            <Style x:Key="LblItemTemplateStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="FontSize" Value="Small" />
                 <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
+
+            <Style x:Key="HeaderTemplateStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="Micro" />
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Orientation="Vertical">
+            <Grid Margin="10,10,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="17.5*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="17.5*"/>
+                    <ColumnDefinition Width="17.5*"/>
+                    <ColumnDefinition Width="17.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <BoxView Color="#e2e2e2" Grid.Row="0" Grid.ColumnSpan="5"/>
+                <Label Text="Rank" Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderTemplateStyle}"/>
+                <Label Text="Team" Grid.Column="1" Grid.Row="0" Style="{StaticResource HeaderTemplateStyle}"/>
+                <Label Text="Points" Grid.Column="2" Grid.Row="0" Style="{StaticResource HeaderTemplateStyle}"/>
+                <Label Text="Goals" Grid.Column="3" Grid.Row="0" Style="{StaticResource HeaderTemplateStyle}"/>
+                <Label Text="Goals against" Grid.Column="4" Grid.Row="0" Style="{StaticResource HeaderTemplateStyle}"/>
+            </Grid>
             <ListView x:Name="leagueTable"
                 ItemsSource="{Binding Table, Mode=TwoWay}"
                 HasUnevenRows="True"
@@ -30,11 +55,11 @@
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="12.5*"/>
-                                    <ColumnDefinition Width="50*"/>
-                                    <ColumnDefinition Width="12.5*"/>
-                                    <ColumnDefinition Width="12.5*"/>
-                                    <ColumnDefinition Width="12.5*"/>
+                                    <ColumnDefinition Width="17.5*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="17.5*"/>
+                                    <ColumnDefinition Width="17.5*"/>
+                                    <ColumnDefinition Width="17.5*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -42,11 +67,11 @@
                                 <BoxView Color="#ced9ff" Grid.Column="0" Grid.RowSpan="1"/>
                                 <BoxView Color="#ced9ff" Grid.Column="2" Grid.RowSpan="1"/>
                                 <BoxView Color="#ced9ff" Grid.Column="4" Grid.RowSpan="1"/>
-                                <Label Text="{Binding rank}" Grid.Column="0" Grid.Row="0" Style="{StaticResource ItemTemplateStyle}"/>
+                                <Label Text="{Binding rank}" Grid.Column="0" Grid.Row="0" Style="{StaticResource LblItemTemplateStyle}"/>
                                 <Image Source="{Binding crestURI}" HeightRequest="3" WidthRequest="3" Grid.Column="1" Grid.Row="0"/>
-                                <Label Text="{Binding points}" Grid.Column="2" Grid.Row="0" Style="{StaticResource ItemTemplateStyle}"/>
-                                <Label Text="{Binding goals}" Grid.Column="3" Grid.Row="0" Style="{StaticResource ItemTemplateStyle}"/>
-                                <Label Text="{Binding goalsAgainst}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ItemTemplateStyle}"/>
+                                <Label Text="{Binding points}" Grid.Column="2" Grid.Row="0" Style="{StaticResource LblItemTemplateStyle}"/>
+                                <Label Text="{Binding goals}" Grid.Column="3" Grid.Row="0" Style="{StaticResource LblItemTemplateStyle}"/>
+                                <Label Text="{Binding goalsAgainst}" Grid.Column="4" Grid.Row="0" Style="{StaticResource LblItemTemplateStyle}"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

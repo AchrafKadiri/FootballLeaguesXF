@@ -47,7 +47,7 @@ namespace FootballLeaguesXF.ViewModels
         {
             try
             {
-                var table = await leagueTableService.GetLeagueTable(Competition.id);
+                var table = await leagueTableService.GetLeagueTable(Competition.id,false);
 
                 Set(table);
             }
@@ -69,7 +69,19 @@ namespace FootballLeaguesXF.ViewModels
 
         void Set(List<Standing> table)
         {
+            int rank = 1;
+
+            foreach(Standing s in table)
+            {
+                if (s.rank == 0)
+                {
+                    s.rank = rank;
+                    rank++;
+                }
+            }
+
             Table = table.ToList();
+
         }
 
         public override void NavigateTo(NavParams navParams)

@@ -1,4 +1,5 @@
 ﻿using FootballLeaguesXF.IServices;
+using FootballLeaguesXF.Plugins;
 using FootballLeaguesXF.Services;
 using FootballLeaguesXF.ViewModels;
 using System;
@@ -33,6 +34,8 @@ namespace FootballLeaguesXF
             container.RegisterInstance<App>(this);
             container.RegisterInstance<IPageFactoryService>(pageFactoryService);
             container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
+
+            var fs = DependencyService.Get<IFileService>(); fs.SandboxTag = "FootballLeaguesXF"; container.RegisterInstance<IFileService>(fs);
 
             //Views and ViewModels
             InitViewAndViewModels.RegisterViewsAndViewModels(container, pageFactoryService);

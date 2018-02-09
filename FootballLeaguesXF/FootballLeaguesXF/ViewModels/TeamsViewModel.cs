@@ -61,7 +61,7 @@ namespace FootballLeaguesXF.ViewModels
         {
             try
             {
-                var teams = await teamsService.GetTeams(Competition.id);
+                var teams = await teamsService.GetTeams(Competition.id,false);
 
                 Set(teams);
             }
